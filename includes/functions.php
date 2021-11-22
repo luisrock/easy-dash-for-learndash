@@ -992,22 +992,22 @@ function tred_template_mount_table($table) { ?>
 
 function tred_template_wptrat_links() { ?>
 
-<div class="tred-wptrat-announcements">
-        <h3>More plugins from the WP Trat</h3>
-        <ul>
-            <li><a href="https://wptrat.com/easy-settings-for-learndash/" target="_blank">Easy Settings for LearnDash</a></li>
-            <li><a href="https://wptrat.com/unenroll-for-learndash/" target="_blank">Unenroll for LearnDash</a></li>
-            <li><a href="https://wptrat.com/next-step-for-learndash/" target="_blank">Next Step for LearnDash</a></li>
-            <li><a href="https://wptrat.com/students-count-for-learndash/" target="_blank">Students Count for LearnDash</a></li>
-            <li><a href="https://wptrat.com/plugins/course-completed-for-learndash/" target="_blank">Course Completed for LearnDash</a></li>
-            <li><a href="https://wptrat.com/plugins/image-taxonomify-for-learndash/" target="_blank">Image Taxonomify for LearnDash</a></li>
-            <li><a href="https://wptrat.com/plugins/grid-button-for-learndash/" target="_blank">Grid Button for LearnDash</a></li>
-            <li><a href="https://wptrat.com/plugins/restrict-comments/" target="_blank">Restrict Comments</a></li>
-            <li><a href="https://wptrat.com/plugins/master-paper-collapse-toggle/" target="_blank">Master Paper Collapse Toggle</a></li>
-        </ul>
-        <div class="tred-wptrat-arrows">
-          <p>⇨ See more at <a href="https://wptrat.com?from=tred_settings_page">WPTrat</a></p>
-          <p>⇨ Get support at <a href="mailto:luisrock@wptrat.com">support@wptrat.com</a></p>
-        </div> 
-    </div><?php
+  <div class="tred-wptrat-announcements">
+    <h3>More plugins from the WP Trat</h3>
+    <ul>
+        <li><a href="https://wptrat.com/easy-settings-for-learndash/" target="_blank">Easy Settings for LearnDash</a></li>
+        <li><a href="https://wptrat.com/unenroll-for-learndash/" target="_blank">Unenroll for LearnDash</a></li>
+        <li><a href="https://wptrat.com/next-step-for-learndash/" target="_blank">Next Step for LearnDash</a></li>
+        <li><a href="https://wptrat.com/students-count-for-learndash/" target="_blank">Students Count for LearnDash</a></li>
+        <li><a href="https://wptrat.com/plugins/course-completed-for-learndash/" target="_blank">Course Completed for LearnDash</a></li>
+        <li><a href="https://wptrat.com/plugins/image-taxonomify-for-learndash/" target="_blank">Image Taxonomify for LearnDash</a></li>
+        <li><a href="https://wptrat.com/plugins/grid-button-for-learndash/" target="_blank">Grid Button for LearnDash</a></li>
+        <li><a href="https://wptrat.com/plugins/restrict-comments/" target="_blank">Restrict Comments</a></li>
+        <li><a href="https://wptrat.com/plugins/master-paper-collapse-toggle/" target="_blank">Master Paper Collapse Toggle</a></li>
+    </ul>
+    <div class="tred-wptrat-arrows">
+      <p>⇨ See more at <a href="https://wptrat.com?from=tred_settings_page">WPTrat</a></p>
+      <p>⇨ Get support at <a href="mailto:luisrock@wptrat.com">support@wptrat.com</a></p>
+    </div> 
+  </div><?php
 }
