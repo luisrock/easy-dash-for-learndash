@@ -1,4 +1,6 @@
 <?php
+//TODO: most completed quizzes
+
 /*
 * TOP BOXES
 */
@@ -12,7 +14,7 @@ $total_students_box = [
   'id' => 'top-students-total',
   'color' => 'green',
   'icon_class' => 'user-graduate',
-  'widget_name' => 'total_students_box'
+  'widget_name' => 'box_total_students'
 ];
 $top_boxes[] = $total_students_box;
 
@@ -22,7 +24,7 @@ $total_groups_box = [
   'id' => 'top-groups-total',
   'color' => 'purple',
   'icon_class' => 'users',
-  'widget_name' => 'total_groups_box'
+  'widget_name' => 'box_total_groups'
 ];
 $top_boxes[] = $total_groups_box;
 
@@ -32,7 +34,7 @@ $total_comments_box = [
   'id' => 'top-comments-total',
   'color' => 'yellow',
   'icon_class' => 'comments',
-  'widget_name' => 'total_comments_box'
+  'widget_name' => 'box_total_comments'
 ];
 $top_boxes[] = $total_comments_box;
 
@@ -42,7 +44,7 @@ $total_courses_box = [
   'id' => 'top-courses-total',
   'color' => 'blue',
   'icon_class' => 'chalkboard-teacher',
-  'widget_name' => 'total_courses_box'
+  'widget_name' => 'box_total_courses'
 ];
 $top_boxes[] = $total_courses_box;
 
@@ -52,7 +54,7 @@ $total_lessons_box = [
   'id' => 'top-lessons-total',
   'color' => 'pink',
   'icon_class' => 'chalkboard',
-  'widget_name' => 'total_lessons_box'
+  'widget_name' => 'box_total_lessons'
 ];
 $top_boxes[] = $total_lessons_box;
 
@@ -62,7 +64,7 @@ $total_topics_box = [
   'id' => 'top-topics-total',
   'color' => 'indigo',
   'icon_class' => 'clipboard-list',
-  'widget_name' => 'total_topics_box'
+  'widget_name' => 'box_total_topics'
 ];
 $top_boxes[] = $total_topics_box;
 
@@ -72,7 +74,7 @@ $total_quizzes_box = [
   'id' => 'top-quizzes-total',
   'color' => 'green',
   'icon_class' => 'question',
-  'widget_name' => 'total_quizzes_box'
+  'widget_name' => 'box_total_quizzes'
 ];
 $top_boxes[] = $total_quizzes_box;
 
@@ -82,7 +84,7 @@ $course_enrolls_box = [
   'id' => 'top-course-enrolls',
   'color' => 'purple',
   'icon_class' => 'door-open',
-  'widget_name' => 'course_enrolls_box'
+  'widget_name' => 'box_course_enrolls'
 ];
 $top_boxes[] = $course_enrolls_box;
 
@@ -92,7 +94,7 @@ $course_starts_box = [
   'id' => 'top-course-starts',
   'color' => 'yellow',
   'icon_class' => 'play',
-  'widget_name' => 'course_starts_box'
+  'widget_name' => 'box_course_starts'
 ];
 $top_boxes[] = $course_starts_box;
 
@@ -102,27 +104,27 @@ $course_completions_box = [
   'id' => 'top-course-completions',
   'color' => 'blue',
   'icon_class' => 'check',
-  'widget_name' => 'course_completions_box'
+  'widget_name' => 'box_course_completions'
 ];
 $top_boxes[] = $course_completions_box;
 
 $essays_pending_box = [
   'title' => __('Essays Pending', 'learndash-easy-dash'),
-  'obs' => '',
+  'obs' => 'Total',
   'id' => 'top-essays-pending',
   'color' => 'pink',
   'icon_class' => 'pen',
-  'widget_name' => 'essays_pending_box'
+  'widget_name' => 'box_essays_pending'
 ];
 $top_boxes[] = $essays_pending_box;
 
 $assignments_pending_box = [
   'title' => __('Assignments Pending', 'learndash-easy-dash'),
-  'obs' => '',
+  'obs' => 'Total',
   'id' => 'top-assignments-pending',
   'color' => 'indigo',
   'icon_class' => 'upload',
-  'widget_name' => 'assignments_pending_box'
+  'widget_name' => 'box_assignments_pending'
 ];
 $top_boxes[] = $assignments_pending_box;
 
@@ -285,6 +287,28 @@ $chart_most_completed_lessons = [
 ];
 $charts[] = $chart_most_completed_lessons;
 
+//MOST COMPLETED TOPICS (30 DAYS)
+$chart_most_completed_topics = [
+  'id' => 'chart-most-completed-topics',
+  'title' => sprintf( __( 'Most Completed topics (last %s days)', 'learndash-easy-dash' ), TRED_LAST_X_DAYS ),
+  'obs' => '',
+  'type' => 'bar',
+  'indexAxis' => 'y',
+  'widget_name' => 'chart_most_completed_topics'
+];
+$charts[] = $chart_most_completed_topics;
+
+//MOST COMPLETED QUIZZES (30 DAYS)
+$chart_most_completed_quizzes = [
+  'id' => 'chart-most-completed-quizzes',
+  'title' => sprintf( __( 'Most Completed quizzes (last %s days)', 'learndash-easy-dash' ), TRED_LAST_X_DAYS ),
+  'obs' => '',
+  'type' => 'bar',
+  'indexAxis' => 'y',
+  'widget_name' => 'chart_most_completed_quizzes'
+];
+$charts[] = $chart_most_completed_quizzes;
+
 //COURSES WITH MORE COMMENTS
 $chart_courses_with_more_comments = [
   'id' => 'chart-courses-with-more-comments',
@@ -298,41 +322,76 @@ $charts[] = $chart_courses_with_more_comments;
 
 
 //COURSES COMPLETED IN THE SAME DAY #TIMES
-$courses_completions_same_day_courses = [
+$chart_courses_completions_same_day_courses = [
   'id' => 'chart-courses-completions-same-day',
   'title' =>  sprintf( __( 'Courses Completed in The Same Day - Top %s (#times)', 'learndash-easy-dash' ), TRED_SELECT_X_ITEMS ),
   'obs' => '',
   'type' => 'bar',
   'indexAxis' => 'x',
-  'widget_name' => 'courses_completions_same_day_courses'
+  'widget_name' => 'chart_courses_completions_same_day'
 ];
-$charts[] = $courses_completions_same_day_courses;
+$charts[] = $chart_courses_completions_same_day_courses;
 
-//COURSES ENROLLS OVERTIME
-$courses_stats_over_time = [
+//COURSES ENROLLS, STARTS, COMPLETIONS OVERTIME
+$chart_courses_stats_over_time = [
   'id' => 'chart-courses-stats-over-time',
   'title' =>  __( 'Courses Stats Over Time', 'learndash-easy-dash' ),
   'obs' => '',
   'type' => 'bar',
   'indexAxis' => 'x',
-  'widget_name' => 'courses_stats_over_time'
+  'widget_name' => 'chart_courses_stats_over_time'
 ];
-$charts[] = $courses_stats_over_time;
+$charts[] = $chart_courses_stats_over_time;
+
+//LESSONS STARTS, COMPLETIONS OVERTIME
+$chart_lessons_stats_over_time = [
+  'id' => 'chart-lessons-stats-over-time',
+  'title' =>  __( 'Lessons Stats Over Time', 'learndash-easy-dash' ),
+  'obs' => '',
+  'type' => 'bar',
+  'indexAxis' => 'x',
+  'widget_name' => 'chart_lessons_stats_over_time'
+];
+$charts[] = $chart_lessons_stats_over_time;
+
+//TOPICS STARTS, COMPLETIONS OVERTIME
+$chart_topics_stats_over_time = [
+  'id' => 'chart-topics-stats-over-time',
+  'title' =>  __( 'Topics Stats Over Time', 'learndash-easy-dash' ),
+  'obs' => '',
+  'type' => 'bar',
+  'indexAxis' => 'x',
+  'widget_name' => 'chart_topics_stats_over_time'
+];
+$charts[] = $chart_topics_stats_over_time;
+
+//QUIZZES STARTS, COMPLETIONS OVERTIME
+$chart_quizzes_stats_over_time = [
+  'id' => 'chart-quizzes-stats-over-time',
+  'title' =>  __( 'Quizzes Stats Over Time', 'learndash-easy-dash' ),
+  'obs' => '',
+  'type' => 'bar',
+  'indexAxis' => 'x',
+  'widget_name' => 'chart_quizzes_stats_over_time'
+];
+$charts[] = $chart_quizzes_stats_over_time;
 
 //numbering widgets
-$i = 1;
+$i = 101;
 foreach ($top_boxes as $k => $tb) {
   $top_boxes[$k]['number'] = $i;
   $top_boxes[$k]['widget_type'] = 'box';
   $i++;
 }
 
+$i = 201;
 foreach ($charts as $k => $ch) {
   $charts[$k]['number'] = $i;
   $charts[$k]['widget_type'] = 'chart';
   $i++;
 }
 
+$i = 301;
 foreach ($tables as $k => $ta) {
   $tables[$k]['number'] = $i;
   $tables[$k]['widget_type'] = 'table';

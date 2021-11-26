@@ -4,7 +4,7 @@ Tags: learndash, education, elearning, lms, learning
 Requires at least: 5.0
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GNU General Public License v3.0
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -26,9 +26,14 @@ Main features (free version):
 * Most Commenting Users
 * Most Completed Courses
 * Most Completed Lessons
+* Most Completed Topics
+* Most Completed Quizzes
 * Courses with more comments
 * Courses completed in the same day
 * Courses stats over time
+* Lessons stats over time
+* Topics stats over time
+* Quizzes stats over time
 * Table with courses completions stats
 * Table students activity
 * Number of students
@@ -61,6 +66,14 @@ Get the Easy Dash for Learndash Pro add-on at [WP Trat](https://wptrat.com/easy-
 5. Dasboard - Tables
 
 == Changelog ==
+= 1.4.0 = 
+* New chart: Lessons Stats Over Time (starts, completions)
+* New chart: Topics Stats Over Time (starts, completions)
+* New chart: Quizzes Stats Over Time (starts, completions)
+* New chart: Most Completed topics (last x days)
+* New chart: Most Completed quizzes (last x days)
+* Attention pro users: shortcode attributtes (widgets numbers and names) have changed. Check the new ones on the shortcode tab (admin) and fix it on your page/post. 
+
 = 1.3.0 = 
 * Plugin prepared for the pro add-on premium feature: export (to CSV, Excel or PDF), copy and print table data
 

@@ -5,7 +5,7 @@
  * Description:  Easy Dash for LearnDash: an improved (and easy) dashboard for your LearnDash site
  * Author: Luis Rock
  * Author URI: https://wptrat.com/
- * Version: 1.3.0
+ * Version: 1.4.0
  * Text Domain: learndash-easy-dash
  * Domain Path: /languages
  * License: GNU General Public License v3.0
@@ -18,7 +18,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-define("TRED_VERSION", "1.3.0");
+define("TRED_VERSION", "1.4.0");
 
 // Check if LearnDash is active. If not, deactivate...
 include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -62,7 +62,7 @@ $tredActions = [
     'tred_ld_comments',
     'tred_ld_activity',
     'tred_ld_courses_completions_stats',
-    'tred_ld_courses_stats_over_time'
+    'tred_ld_items_stats_over_time'
 ];
 
 $tredColors = [
@@ -80,6 +80,8 @@ $tredColors = [
     'purple_t' => 'rgb(153, 102, 255, 0.2)',
     'grey' => 'rgb(201, 203, 207)',
     'grey_t' => 'rgb(201, 203, 207, 0.2)',
+    'pink' => 'rgb(251, 207, 232)',
+    'pink_t' => 'rgb(251, 207, 232, 0.2)',
 ];
 
 

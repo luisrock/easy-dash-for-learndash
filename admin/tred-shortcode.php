@@ -85,7 +85,7 @@
             <p>Will display all widgets from all types</p>
             <br>
             <p>
-                <code>[easydash types="table" show="25"]</code> or 
+                <code>[easydash types="table" show="301"]</code> or 
                 <code>[easydash types="table" show="table_completion_course_stats"]</code>
             </p>
             <p>
@@ -93,8 +93,8 @@
             </p>
             <br>
             <p>
-                <code>[easydash hide="8,9"]</code> or
-                <code>[easydash hide="course_enrolls_box,course_starts_box]</code>
+                <code>[easydash hide="108,109"]</code> or
+                <code>[easydash hide="box_course_enrolls,box_course_starts]</code>
             </p>
             <p>Will display all widgets from all types, except course enrolls and starts boxes </p>
             <br>

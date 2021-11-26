@@ -458,13 +458,15 @@ function tred_learndash_rank_courses_by_activity($activity) {
 
 
 //Get course completions on the last $days
-function tred_learndash_rank_courses_lessons_by_completion($activity) { 
+function tred_learndash_rank_courses_items_by_completion($activity) { 
 	if(!is_array($activity)) {
 		return false;
 	}
 
   $courses = [];
   $lessons = [];
+  $topics = [];
+  $quizzes = [];
   $keys = ['id','title','total'];
 
     
@@ -497,6 +499,28 @@ function tred_learndash_rank_courses_lessons_by_completion($activity) {
       }
       $lessons[$act->post_id]['total'] += 1;
     }
+
+    if( $activity_type == 'topic' && !empty($act->post_id) ) {
+      //Setting the post_id and its tree
+      if( !isset($topics[$act->post_id]) ) {
+        $topics[$act->post_id] = [];
+        $topics[$act->post_id]['total'] = 0; 
+        $topics[$act->post_id]['id'] = $act->post_id; 
+        $topics[$act->post_id]['title'] = get_the_title($act->post_id);
+      }
+      $topics[$act->post_id]['total'] += 1;
+    }
+
+    if( $activity_type == 'quiz' && !empty($act->post_id) ) {
+      //Setting the post_id and its tree
+      if( !isset($quizzes[$act->post_id]) ) {
+        $quizzes[$act->post_id] = [];
+        $quizzes[$act->post_id]['total'] = 0; 
+        $quizzes[$act->post_id]['id'] = $act->post_id; 
+        $quizzes[$act->post_id]['title'] = get_the_title($act->post_id);
+      }
+      $quizzes[$act->post_id]['total'] += 1;
+    }
     
   } //end foreach
 
@@ -508,10 +532,20 @@ function tred_learndash_rank_courses_lessons_by_completion($activity) {
   usort($lessons, function ($a, $b) {
       return $b['total'] - $a['total'];
   });
+
+  usort($topics, function ($a, $b) {
+    return $b['total'] - $a['total'];
+  });
+
+  usort($quizzes, function ($a, $b) {
+      return $b['total'] - $a['total'];
+  });
   
   $output = [ 
     'courses' => $courses,
-    'lessons' => $lessons
+    'lessons' => $lessons,
+    'topics' => $topics,
+    'quizzes' => $quizzes
   ];
     
   return $output;  	
@@ -852,6 +886,8 @@ function tred_learndash_get_activity_last_12_months() {
   return $output;    
 }
 
+
+//TEMPLATES FUNCTIONS
 function tred_template_mount_box($box) { ?>
   <div class="w-full md:w-1/2 xl:w-1/3 p-6">
       <!--Metric Card-->

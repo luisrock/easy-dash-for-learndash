@@ -268,19 +268,48 @@ function tred_ld_activity() {
         $response['data']['users_activities_last_x_days'] = $users_activities_last_x_days;
 
         $courses_ranked_by_activity_last_x_days = tred_learndash_rank_courses_by_activity($activity);
-        $items_ranked_by_completions_last_x_days = tred_learndash_rank_courses_lessons_by_completion($activity);
-        $courses_ranked_by_completions_last_x_days = tred_get_from_array($items_ranked_by_completions_last_x_days, 'courses');
-        $lessons_ranked_by_completions_last_x_days = tred_get_from_array($items_ranked_by_completions_last_x_days, 'lessons');
-        
-        $most_completed_courses_titles = array_map( function( $val ) {return $val['title'];}, $courses_ranked_by_completions_last_x_days );
-        $most_completed_courses_totals = array_map( function( $val ) {return $val['total'];}, $courses_ranked_by_completions_last_x_days );
-        $most_completed_lessons_titles = array_map( function( $val ) {return $val['title'];}, $lessons_ranked_by_completions_last_x_days );
-        $most_completed_lessons_totals = array_map( function( $val ) {return $val['total'];}, $lessons_ranked_by_completions_last_x_days ); 
+        $items_ranked_by_completions_last_x_days = tred_learndash_rank_courses_items_by_completion($activity);
 
-        $response['data']['most_completed_courses_titles'] = $most_completed_courses_titles;
-        $response['data']['most_completed_courses_totals'] = $most_completed_courses_totals;
-        $response['data']['most_completed_lessons_titles'] = $most_completed_lessons_titles;
-        $response['data']['most_completed_lessons_totals'] = $most_completed_lessons_totals;
+        // echo json_encode($items_ranked_by_completions_last_x_days);
+        // die();
+
+        foreach(['courses','lessons','topics','quizzes'] as $ldi) {
+            // if($ldi === 'courses') {
+            //     $ldi_ranked_by_completions_last_x_days = tred_learndash_rank_courses_by_activity($activity);
+            // } else {
+            //     $ldi_ranked_by_completions_last_x_days = tred_get_from_array($items_ranked_by_completions_last_x_days, $ldi); 
+            // }
+            $ldi_ranked_by_completions_last_x_days = tred_get_from_array($items_ranked_by_completions_last_x_days, $ldi); 
+            $most_completed_ldi_titles = array_map( function( $val ) {return $val['title'];}, $ldi_ranked_by_completions_last_x_days );
+            $most_completed_ldi_totals = array_map( function( $val ) {return $val['total'];}, $ldi_ranked_by_completions_last_x_days );
+            
+            $chart = [];
+            $chart['id'] = 'chart-most-completed-' . $ldi;
+            $chart['labels'] = $most_completed_ldi_titles;
+            $datasets = [
+                [
+                    'label' => 'Completions',
+                    'data' => $most_completed_ldi_totals,
+                    'borderColor' => 'rgb(54, 162, 235)',
+                    'backgroundColor' => 'rgba(255, 99, 132, 0.2)'
+                ],      
+            ];
+            $chart['datasets'] = $datasets;
+            $response['data']['charts'][] = $chart;    
+        } // end foreach
+
+        // $courses_ranked_by_completions_last_x_days = tred_get_from_array($items_ranked_by_completions_last_x_days, 'courses');
+        // $lessons_ranked_by_completions_last_x_days = tred_get_from_array($items_ranked_by_completions_last_x_days, 'lessons');
+        
+        // $most_completed_courses_titles = array_map( function( $val ) {return $val['title'];}, $courses_ranked_by_completions_last_x_days );
+        // $most_completed_courses_totals = array_map( function( $val ) {return $val['total'];}, $courses_ranked_by_completions_last_x_days );
+        // $most_completed_lessons_titles = array_map( function( $val ) {return $val['title'];}, $lessons_ranked_by_completions_last_x_days );
+        // $most_completed_lessons_totals = array_map( function( $val ) {return $val['total'];}, $lessons_ranked_by_completions_last_x_days ); 
+
+        // $response['data']['most_completed_courses_titles'] = $most_completed_courses_titles;
+        // $response['data']['most_completed_courses_totals'] = $most_completed_courses_totals;
+        // $response['data']['most_completed_lessons_titles'] = $most_completed_lessons_titles;
+        // $response['data']['most_completed_lessons_totals'] = $most_completed_lessons_totals;
 
         $chart = [];
         $chart['id'] = 'chart-most-active-students';
@@ -341,35 +370,33 @@ function tred_ld_activity() {
         $table['obs'] = 'Enrolls: courses | Starts and completions: courses, lessons, topics, quizzes';
         $response['data']['tables'][] = $table;
 
+        // $chart = [];
+        // $chart['id'] = 'chart-most-completed-courses';
+        // $chart['labels'] = $most_completed_courses_titles;
+        // $datasets = [
+        //     [
+        //         'label' => 'Completions',
+        //         'data' => $most_completed_courses_totals,
+        //         'borderColor' => 'rgb(54, 162, 235)',
+        //         'backgroundColor' => 'rgba(255, 99, 132, 0.2)'
+        //     ],      
+        // ];
+        // $chart['datasets'] = $datasets;
+        // $response['data']['charts'][] = $chart;
 
-
-        $chart = [];
-        $chart['id'] = 'chart-most-completed-courses';
-        $chart['labels'] = $most_completed_courses_titles;
-        $datasets = [
-            [
-                'label' => 'Completions',
-                'data' => $most_completed_courses_totals,
-                'borderColor' => 'rgb(54, 162, 235)',
-                'backgroundColor' => 'rgba(255, 99, 132, 0.2)'
-            ],      
-        ];
-        $chart['datasets'] = $datasets;
-        $response['data']['charts'][] = $chart;
-
-        $chart = [];
-        $chart['id'] = 'chart-most-completed-lessons';
-        $chart['labels'] = $most_completed_lessons_titles;
-        $datasets = [
-            [
-                'label' => 'Completions',
-                'data' => $most_completed_lessons_totals,
-                'borderColor' => 'rgb(54, 162, 235)',
-                'backgroundColor' => 'rgba(255, 99, 132, 0.2)'
-            ],      
-        ];
-        $chart['datasets'] = $datasets;
-        $response['data']['charts'][] = $chart;
+        // $chart = [];
+        // $chart['id'] = 'chart-most-completed-lessons';
+        // $chart['labels'] = $most_completed_lessons_titles;
+        // $datasets = [
+        //     [
+        //         'label' => 'Completions',
+        //         'data' => $most_completed_lessons_totals,
+        //         'borderColor' => 'rgb(54, 162, 235)',
+        //         'backgroundColor' => 'rgba(255, 99, 132, 0.2)'
+        //     ],      
+        // ];
+        // $chart['datasets'] = $datasets;
+        // $response['data']['charts'][] = $chart;
     } else {
         $response['result'] = 'error';
     }
@@ -437,7 +464,7 @@ function tred_ld_courses_completions_stats() {
    die();
 }
 
-function tred_ld_courses_stats_over_time() {
+function tred_ld_items_stats_over_time() {
     
     if ( !isset( $_REQUEST['_wpnonce'] ) || !wp_verify_nonce( $_REQUEST['_wpnonce'], 'tred_nonce' ) ) {
         die( __( 'Security check', 'learndash-easy-dash' ) ); 
@@ -463,11 +490,11 @@ function tred_ld_courses_stats_over_time() {
 	});
 
     $act_array = [];
-    $types = ['course','lesson','topic','quiz'];
+    $types = ['course' => 'courses','lesson' => 'lessons','topic' => 'topics','quiz' => 'quizzes'];
     foreach($activity_array as $key => $activities) {
         $act_array[$key] = [];
         $act_array[$key]['course_enrolls'] = 0;
-        foreach($types as $type) {
+        foreach($types as $type => $type_plural) {
             $act_array[$key][$type . '_starts'] = 0;
             $act_array[$key][$type . '_completions'] = 0;
         }
@@ -484,7 +511,7 @@ function tred_ld_courses_stats_over_time() {
                 $act_array[$key]['course_enrolls'] += 1;
                 continue;
             }
-            if( !in_array($act->activity_type, $types) ) {
+            if( !in_array($act->activity_type, array_keys($types)) ) {
                 continue;
             }
             if(!empty($act->activity_completed) && !empty($act->activity_status)) {
@@ -498,35 +525,38 @@ function tred_ld_courses_stats_over_time() {
         } //end inner foreach (activities)
     } //end outter foreach
 
-    $chart = [];
-    $chart['id'] = 'chart-courses-stats-over-time';
-    $chart['labels'] = array_map(function($v){return tred_year_month_numbers_to_string_month_slash_year($v);},array_keys($act_array));
-    $chart['slice'] = 'last';
-
-    $datasets = [
-        [
-        'label' => 'Enrolls',
-        'data' => array_values(array_map(function($v){return $v['course_enrolls'];},$act_array)),
-        'borderColor' => 'rgb(54, 162, 235)',
-        'backgroundColor' => 'rgba(255, 99, 132, 0.2)'
-        ],
-        [
+    foreach($types as $type => $type_plural) {
+        $chart = [];
+        $datasets = [];
+        $chart['id'] = 'chart-' . $type_plural . '-stats-over-time';
+        $chart['labels'] = array_map(function($v){return tred_year_month_numbers_to_string_month_slash_year($v);},array_keys($act_array));
+        $chart['slice'] = 'last';
+        if($type === 'course') {
+            $datasets[] = [
+                'label' => 'Enrolls',
+                'data' => array_values(array_map(function($v) use ($type) {return $v[$type . '_enrolls'];},$act_array)),
+                'borderColor' => 'rgb(54, 162, 235)',
+                'backgroundColor' => 'rgba(255, 99, 132, 0.2)'
+            ];
+        }
+        $datasets[] = [
             "label" => "Starts",
-            "data" => array_values(array_map(function($v){return $v['course_starts'];},$act_array)),
+            "data" => array_values(array_map(function($v) use ($type) {return $v[$type . '_starts'];},$act_array)),
             "type" => "line",
             "fill" => false,
             "borderColor" => "#44976A"
-        ],
-        [
+        ];
+        $datasets[] = [
             "label" => "Completions",
-            "data" => array_values(array_map(function($v){return $v['course_completions'];},$act_array)),
+            "data" => array_values(array_map(function($v) use ($type) {return $v[$type . '_completions'];},$act_array)),
             "type" => "line",
             "fill" => false,
             "borderColor" => "#D9782A"
-        ],      
-    ];
-    $chart['datasets'] = $datasets;
-    $response['data']['charts'][] = $chart;
+        ];      
+        $chart['datasets'] = $datasets;
+        $response['data']['charts'][] = $chart;
+    } // end foreach types
+    
         
     echo json_encode($response);
     die();

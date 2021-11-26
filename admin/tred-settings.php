@@ -1,24 +1,26 @@
 <?php
 //Define options (keys) and fields vitals (values)
 
+//TODO: based on vars.php
+
 $options_array = [
 
     'tred_top_boxes_to_hide' => [
         'type' => 'select',
         'kind' => 'multiple',
         'options' => [
-            'total_students_box' => __('Students', 'learndash-easy-dash'),
-            'total_groups_box' => __('Groups', 'learndash-easy-dash'),
-            'total_comments_box' => __('Comments', 'learndash-easy-dash'),
-            'total_courses_box' => __('Courses', 'learndash-easy-dash'),
-            'total_lessons_box' => __('Lessons', 'learndash-easy-dash'),
-            'total_topics_box' => __('Topics', 'learndash-easy-dash'),
-            'total_quizzes_box' => __('Quizzes', 'learndash-easy-dash'),
-            'course_enrolls_box' => __('Course Enrolls', 'learndash-easy-dash'),
-            'course_starts_box' => __('Course Starts', 'learndash-easy-dash'),
-            'course_completions_box' => __('Course Completions', 'learndash-easy-dash'),
-            'essays_pending_box' => __('Essays Pending', 'learndash-easy-dash'),
-            'assignments_pending_box' => __('Assignments Pending', 'learndash-easy-dash'),
+            'box_total_students' => __('Students', 'learndash-easy-dash'),
+            'box_total_groups' => __('Groups', 'learndash-easy-dash'),
+            'box_total_comments' => __('Comments', 'learndash-easy-dash'),
+            'box_total_courses' => __('Courses', 'learndash-easy-dash'),
+            'box_total_lessons' => __('Lessons', 'learndash-easy-dash'),
+            'box_total_topics' => __('Topics', 'learndash-easy-dash'),
+            'box_total_quizzes' => __('Quizzes', 'learndash-easy-dash'),
+            'box_course_enrolls' => __('Course Enrolls', 'learndash-easy-dash'),
+            'box_course_starts' => __('Course Starts', 'learndash-easy-dash'),
+            'box_course_completions' => __('Course Completions', 'learndash-easy-dash'),
+            'box_essays_pending' => __('Essays Pending', 'learndash-easy-dash'),
+            'box_assignments_pending' => __('Assignments Pending', 'learndash-easy-dash'),
         ],
         'default' => [],
         'description'=> __('Hide selected top boxes widgets on the dashboard.', 'learndash-easy-dash'),
@@ -40,10 +42,15 @@ $options_array = [
             'chart_most_active_students'  => __('Most Active Students', 'learndash-easy-dash'), 
             'chart_most_commenting_users'  => __('Most Commenting Users', 'learndash-easy-dash'), 
             'chart_most_completed_courses'  => __('Most Completed Courses', 'learndash-easy-dash'), 
-            'chart_most_completed_lessons'  => __('Most Completed Lessons', 'learndash-easy-dash'), 
+            'chart_most_completed_lessons'  => __('Most Completed Lessons', 'learndash-easy-dash'),
+            'chart_most_completed_topics'  => __('Most Completed Topics', 'learndash-easy-dash'), 
+            'chart_most_completed_quizzes'  => __('Most Completed Quizzes', 'learndash-easy-dash'), 
             'chart_courses_with_more_comments'  => __('Courses With More Comments', 'learndash-easy-dash'), 
-            'courses_completions_same_day_courses'  => __('Courses Completed in the Same Day', 'learndash-easy-dash'),
-            'courses_stats_over_time'  => __('Courses Stats Over Time', 'learndash-easy-dash'), 
+            'chart_courses_completions_same_day_courses'  => __('Courses Completed in the Same Day', 'learndash-easy-dash'),
+            'chart_courses_stats_over_time'  => __('Courses Stats Over Time', 'learndash-easy-dash'),
+            'chart_lessons_stats_over_time'  => __('Lessons Stats Over Time', 'learndash-easy-dash'),
+            'chart_topics_stats_over_time'  => __('Topics Stats Over Time', 'learndash-easy-dash'),
+            'chart_quizzes_stats_over_time'  => __('Quizzes Stats Over Time', 'learndash-easy-dash'), 
         ],
         'default' => [],
         'description'=> __('Hide selected charts widgets on the dashboard.', 'learndash-easy-dash'),
